@@ -1,0 +1,39 @@
+<!--
+  Generated template for the TutorialPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content>
+	<ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
+		<ion-slide>
+			<div class='diag' style="background: url('assets/imgs/whitebg.svg')" no-repeat>
+				<ion-icon class='tutorialIcon' ios="ios-analytics" md="md-analytics" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+			</div>
+			<div [@bounce]='state'>
+				<h2>Track your Routine</h2>
+				<p>weather its sets, reps, weight used, you can track it all with our intutive app. </p>
+			</div>
+		</ion-slide>
+		<ion-slide>
+			<div class='diag' style="background: url('assets/imgs/whitebg.svg')" no-repeat>
+				<ion-icon class='tutorialIcon' ios="ios-trophy" md="md-trophy" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+			</div>
+			<div [@bounce]='state'>
+				<h2>Track your Routine</h2>
+				<p>weather its sets, reps, weight used, you can track it all with our intutive app. </p>
+			</div>
+		</ion-slide>
+		<ion-slide>
+			<div class='diag' style="background: url('assets/imgs/whitebg.svg')" no-repeat>
+				<ion-icon class='tutorialIcon' ios="ios-chatboxes" md="md-chatboxes" color="primary" [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+			</div>
+			<div [@bounce]='state'>
+				<h2>Track your Routine</h2>
+				<p>weather its sets, reps, weight used, you can track it all with our intutive app. </p>
+			</div>
+		</ion-slide>
+	</ion-slides>
+	<button ion-button clear (click)="skip()" id="skip">{{ skipMsg }}</button>
+</ion-content>

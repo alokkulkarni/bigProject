@@ -1,0 +1,25 @@
+<!-- Generated template for the FloatingListComponent component -->
+<div>
+  <ion-fab right bottom fixed #fab>
+    <button ion-fab mini>
+      <ion-icon name="keypad"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="dialNumber()">
+        <ion-icon name="call" (click)="dialNumber(fab)"></ion-icon>
+      </button>
+      <button ion-fab (click)="chat(fab)">
+        <ion-icon name="chatboxes"></ion-icon>
+      </button>
+      <!-- <button ion-fab>
+        <ion-icon name="construct"></ion-icon>
+      </button> -->
+      <button ion-fab>
+        <ion-icon name="calendar"></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</div>
