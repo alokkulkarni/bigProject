@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef} from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -8,13 +8,11 @@ import { BackgroundFetch, BackgroundFetchConfig } from '@ionic-native/background
 import { Badge } from '@ionic-native/badge';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { Device } from '@ionic-native/device';
+import 'web-animations-js/web-animations.min';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ConstantProvider } from '../providers/constant/constant'; 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-
 
 
 @Component({
@@ -22,22 +20,23 @@ import { ContactPage } from '../pages/contact/contact';
 })
 export class MyApp {
 
-  rootPage:any = TutorialPage;
+  rootPage:any;
   
   fingerprintOptions: FingerprintOptions;
   uniqueID: string;
+  message: any;
   @ViewChild('Nav') navCtrl: ElementRef;
 
   constructor(platform: Platform, 
               statusBar: StatusBar, 
               splashScreen: SplashScreen, 
               public constantService: ConstantProvider, 
-              private uniqueDeviceID: UniqueDeviceID,
-              private fingerprint: FingerprintAIO,
-              private backgroundFetch: BackgroundFetch,
-              private badge: Badge,              
-              private device: Device,
-              private deeplinks: Deeplinks) {
+              public uniqueDeviceID: UniqueDeviceID,
+              public fingerprint: FingerprintAIO,
+              public backgroundFetch: BackgroundFetch,
+              public badge: Badge,              
+              public device: Device,
+              public deeplinks: Deeplinks) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -114,25 +113,27 @@ export class MyApp {
           console.log(err);
         });
 
-      deeplinks
-        .routeWithNavController(this.navCtrl, {
-        '/about-us': AboutPage,
-        '/products/:productId': ContactPage
-      })
-        .subscribe((match) => {
-          // match.$route - the route we matched, which is the matched entry from the
-          // arguments to route() match.$args - the args passed in the link match.$link -
-          // the full link data
-          console.log('Successfully matched route', match);
-        }, (nomatch) => {
-          // nomatch.$link - the full link data
-          console.error('Got a deeplink that didn\'t match', nomatch);
-        });
+      // deeplinks
+      //   .routeWithNavController(this.navCtrl, {
+      //   '/about-us': AboutPage,
+      //   '/products/:productId': ContactPage
+      // })
+      //   .subscribe((match) => {
+      //     // match.$route - the route we matched, which is the matched entry from the
+      //     // arguments to route() match.$args - the args passed in the link match.$link -
+      //     // the full link data
+      //     console.log('Successfully matched route', match);
+      //   }, (nomatch) => {
+      //     // nomatch.$link - the full link data
+      //     console.error('Got a deeplink that didn\'t match', nomatch);
+      //   });
 
       if (this.constantService.getSkipTutorial()) {
         console.log(this.constantService.getSkipTutorial());
         this.rootPage = TabsPage;
-      };
+      } else {
+        this.rootPage = TutorialPage;
+      }
     });
-  }  
+  }
 }

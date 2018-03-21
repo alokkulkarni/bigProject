@@ -1,19 +1,117 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
-    <notification></notification>
+    <notification (click)="showNotifications()"></notification>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-   <ion-list>
-      <ion-card>
-        <ion-card-content>
-          <ion-item>
-            <h4>Account Number</h4>
-            <p>12345678</p>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
-   </ion-list>
+  <!-- <ion-card> -->
+      <!-- <ion-card-content>
+        <ion-card-title>
+          <h4>Barclays Accounts</h4>
+        </ion-card-title>
+      </ion-card-content> -->
+      <ion-list>
+        <ion-list-header>
+          <h4>Barclays Accounts</h4>
+        </ion-list-header>
+        <ion-item (click)="showTransactionDetail()">
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-list-header>
+          <h4>Other Accounts</h4>
+        </ion-list-header>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" item-start></ion-icon>
+          <h4>12345678</h4>
+          <h5>Barclay's Current Account</h5>
+          <circle-progress [percent]="35" [radius]="30" [outerStrokeWidth]="5" [innerStrokeWidth]="3" [outerStrokeColor]="'#78C000'"
+            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [titleFontSize]="12" [showSubtitle]="false"
+            [toFixed]="0" [renderOnClick]="false" [showUnits]="false" item-end>
+          </circle-progress>
+        </ion-item>
+      </ion-list>
+  <!-- </ion-card> -->
+   <div #hejs id="hejs"></div>
 </ion-content>

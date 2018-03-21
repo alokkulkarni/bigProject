@@ -4,6 +4,7 @@ import { Slides } from 'ionic-angular';
 
 
 import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 import { ConstantProvider } from '../../providers/constant/constant';
 
 /**

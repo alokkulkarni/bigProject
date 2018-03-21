@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
- * Generated class for the MapsPage page.
+ * Generated class for the DisplayMapPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,14 +11,17 @@ import { NavController, NavParams } from 'ionic-angular';
 declare var google: any;
 
 @Component({
-  selector: 'page-maps',
-  templateUrl: 'maps.html',
+  selector: 'page-display-map',
+  templateUrl: 'display-map.html',
 })
-export class MapsPage {
+export class DisplayMapPage {
 
-  @ViewChild('map') branchFinder: ElementRef;
+  @ViewChild('mapsDisplay') displayMap: ElementRef;
 
-	image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+  lat: any;
+  lng: any;
+  
+  image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
   
   contentString = '<div id="content">'+
             '<div id="siteNotice">'+
@@ -26,17 +29,22 @@ export class MapsPage {
             '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
             '<div id="bodyContent">'+
             '</div>'+
-						'</div>';
-						
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+            '</div>';
 
-  ionViewDidLoad() {
-    this.showMap();
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+    
   }
 
-  showMap() {
+  ionViewDidLoad() {
+    this.lat = this.navParams.get('lat');
+    this.lng = this.navParams.get('lng');
+    this.showMap(this.lat, this.lng);
+  }
+
+  showMap(lat: string, lng: string) {
   	//location
-  	const location = new google.maps.LatLng(51.507351, -0.127758);
+  	const location = new google.maps.LatLng(lat, lng);
 
     //{lat: 51.507351, lng: -0.127758};
 
@@ -46,12 +54,8 @@ export class MapsPage {
   		center: location,
   		zoom: 15,
   		mapTypeId: 'roadmap',
-			streetViewControl: true,
-			streetViewControlOptions: {
-              position: google.maps.ControlPosition.LEFT_TOP
-      },
-			mapTypeControl: false,
-			fullscreenControl: false,
+      streetViewControl: true,
+      mapTypeControl: false,
       styles: [
             {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
             {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
@@ -164,8 +168,7 @@ export class MapsPage {
         ]
   	}
 
-		const map = new google.maps.Map(this.branchFinder.nativeElement, options);
-
+  	const map = new google.maps.Map(this.displayMap.nativeElement, options);
     const infowindow = this.infowindowFunction();
 
     const marker = this.addMarker(location, map);
@@ -173,23 +176,29 @@ export class MapsPage {
     marker.addListener('click', function() {
           
           infowindow.open(map, marker);
-		});
+    });
+  }
 
-	}
-	
-	infowindowFunction() {
+  infowindowFunction() {
     return new google.maps.InfoWindow({
           content: this.contentString
     });
   }
 
+
+
   addMarker(position, map) {
   	return new google.maps.Marker({
   		position,
-			map,
-			icon: this.image,
+      map,
+      icon: this.image,
       animation: google.maps.Animation.DROP
   	});
+  }
+
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
 }

@@ -12,6 +12,6 @@ import {NavController} from 'ionic-angular';
 })
 export class NotificationComponent {
 
-  constructor(private navCtrl: NavController) {}
+  constructor(public navCtrl: NavController) {}
 
 }

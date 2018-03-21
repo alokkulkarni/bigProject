@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { DisplayMapPage } from '../display-map/display-map';
 /**
- * Generated class for the MapsPage page.
+ * Generated class for the TransactionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,15 +10,21 @@ import { NavController, NavParams } from 'ionic-angular';
 
 declare var google: any;
 
+
 @Component({
-  selector: 'page-maps',
-  templateUrl: 'maps.html',
+  selector: 'page-transaction',
+  templateUrl: 'transaction.html',
 })
-export class MapsPage {
+export class TransactionPage {
 
-  @ViewChild('map') branchFinder: ElementRef;
+  @ViewChild('mapRef') mapRef: ElementRef;
 
-	image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+  coordinates = [{lat: 53.394775, lng: -2.343679},{lat: 53.394715,lng: -2.350580},{lat: 53.832247,lng: -1.467817},{lat: 53.888743,lng: -0.648900},{lat: 49.734237,lng: 10.982549}];
+  
+  lat: any;
+  lng: any;
+
+  image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
   
   contentString = '<div id="content">'+
             '<div id="siteNotice">'+
@@ -26,17 +32,25 @@ export class MapsPage {
             '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
             '<div id="bodyContent">'+
             '</div>'+
-						'</div>';
-						
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+            '</div>';
 
-  ionViewDidLoad() {
-    this.showMap();
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
-  showMap() {
+  ionViewDidLoad() {
+    const coordinate = this.coordinates[Math.floor(Math.random() * this.coordinates.length)];
+    // this.lat = 51.507351;
+    // this.lng = -0.127758;
+
+    this.lat = coordinate.lat;
+    this.lng = coordinate.lng;
+    this.showMap(this.lat, this.lng);
+  }
+
+  showMap(lat: string, lng: string) {
   	//location
-  	const location = new google.maps.LatLng(51.507351, -0.127758);
+  	const location = new google.maps.LatLng(lat, lng);
 
     //{lat: 51.507351, lng: -0.127758};
 
@@ -44,14 +58,11 @@ export class MapsPage {
   	//Map Options
   	const options = {
   		center: location,
-  		zoom: 15,
+  		zoom: 8,
   		mapTypeId: 'roadmap',
-			streetViewControl: true,
-			streetViewControlOptions: {
-              position: google.maps.ControlPosition.LEFT_TOP
-      },
-			mapTypeControl: false,
-			fullscreenControl: false,
+      streetViewControl: false,
+      mapTypeControl: false,
+      zoomControl: false,
       styles: [
             {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
             {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
@@ -164,8 +175,7 @@ export class MapsPage {
         ]
   	}
 
-		const map = new google.maps.Map(this.branchFinder.nativeElement, options);
-
+  	const map = new google.maps.Map(this.mapRef.nativeElement, options);
     const infowindow = this.infowindowFunction();
 
     const marker = this.addMarker(location, map);
@@ -173,23 +183,29 @@ export class MapsPage {
     marker.addListener('click', function() {
           
           infowindow.open(map, marker);
-		});
+    });
+  }
 
-	}
-	
-	infowindowFunction() {
+  infowindowFunction() {
     return new google.maps.InfoWindow({
           content: this.contentString
     });
   }
 
+
+
   addMarker(position, map) {
   	return new google.maps.Marker({
   		position,
-			map,
-			icon: this.image,
+      map,
+      icon: this.image,
       animation: google.maps.Animation.DROP
   	});
+  }
+
+  showModalMapsPage() {
+    let modal = this.modalCtrl.create(DisplayMapPage, {lat: this.lat, lng: this.lng});
+    modal.present();
   }
 
 }

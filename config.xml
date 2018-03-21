@@ -95,6 +95,7 @@
         <variable name="DEEPLINK_SCHEME" value="https" />
         <variable name="DEEPLINK_HOST" value="bigProject.com" />
         <variable name="ANDROID_PATH_PREFIX" value="/" />
+        <variable name="IOS_PATH_PREFIX" value="/" />
     </plugin>
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-pin-dialog" spec="^0.1.3" />

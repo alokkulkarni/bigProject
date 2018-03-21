@@ -11,44 +11,51 @@ import { NativeStorage } from '@ionic-native/native-storage';
 @Injectable()
 export class ConstantProvider {
 
-  skipTutorial: boolean;	
+  skipTutorial: boolean = true;
   storedData: any;
 
   constructor(private nativeStorage: NativeStorage) {}
 
   setSkipTutorial(value:boolean) {
-    this.nativeStorage.clear().then(
-	     () => this.setItem('tutorialData', {skipTutorial: value}),
-	     error => console.log("clearing error - " + error)
-    ); 
+    // this.nativeStorage.clear().then(
+	  //    () => this.setItem('tutorialData', {skipTutorial: value}),
+	  //    error => console.log("clearing error - " + error)
+		// ); 
+		 this.setItem("tutorialPage", {skipTutorial:value});
   };	
 
   getSkipTutorial():boolean {
-  	this.getItem('tutorialData');
-		console.log("stored data in native storage - " + this.storedData);
-		if (this.storedData) {
-			this.skipTutorial = this.storedData;
-		} else {
-			this.skipTutorial = false;
+  	this.getItem('tutorialData').then(data => {
+					console.log("stored data in native storage - " + this.storedData);
+					if (this.storedData) {
+							this.skipTutorial = this.storedData;
+							return this.skipTutorial;
+					}
+		})		
+  	return false;
+  };
+
+  async setItem(reference: string, value: any) {
+		console.log('before Storing item ' + value.skipTutorial);
+		try {
+				await this
+						.nativeStorage
+						.setItem(reference, value);
+
+		} catch (e) {
+				console.log("Error while storing the item " + e);
 		}
-  	return this.skipTutorial;
   };
 
-  setItem(reference: string, value: any) {
-  	console.log('before Storing item ' + value.skipTutorial);
-		this.nativeStorage.setItem(reference, value)
-				.then(
-					() => console.log('Stored item!' + value),
-					error => console.log('Error storing item - ' + error)
-				);
-  };
-
-  getItem(reference: string) {
-  	console.log("reference to the item passed " + reference);
-  	this.nativeStorage.getItem(reference)
-		  .then(
-		    data => console.log("data retrieved - " + data.skipTutorial),
-		    error => console.log("getting error - " + error)
-		  );
+  async getItem(reference: string): Promise<any> {
+		console.log("reference to the item passed " + reference);
+		try {
+				let data = await this
+						.nativeStorage
+						.getItem(reference);
+				return data;		
+		} catch(e) {
+				console.log("Error while fetching stored item :-" + e);
+		}
   };
 }

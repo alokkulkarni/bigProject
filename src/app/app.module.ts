@@ -8,11 +8,15 @@ import { BackgroundFetch, BackgroundFetchConfig } from '@ionic-native/background
 import { Badge } from '@ionic-native/badge';
 import { CallNumber } from '@ionic-native/call-number';
 import { Deeplinks } from '@ionic-native/deeplinks';
+import {IonicStorageModule} from '@ionic/storage';
 import { Device } from '@ionic-native/device';
 import {PinDialog} from '@ionic-native/pin-dialog';
 
+
 import {FloatingListComponent} from '../components/floating-list/floating-list';
 import {NotificationComponent} from '../components/notification/notification';
+import {NgCircleProgressModule} from 'ng-circle-progress';
+import { NgProgressModule } from 'ngx-progressbar';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -24,6 +28,9 @@ import { LoginPage } from '../pages/login/login';
 import { DisplayNotificationsPage } from '../pages/display-notifications/display-notifications';
 import { HelpPage } from '../pages/help/help';
 import { MorePage } from '../pages/more/more';
+import { TransactionPage } from '../pages/transaction/transaction';
+import { TransactionMasterPage } from '../pages/transaction-master/transaction-master';
+import { DisplayMapPage } from '../pages/display-map/display-map';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,6 +38,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MyApp } from './app.component';
 import { ConstantProvider } from '../providers/constant/constant';
+
+import {firebaseConfig} from '../environment/firebase.config';
+
 
 @NgModule({
   declarations: [
@@ -46,12 +56,28 @@ import { ConstantProvider } from '../providers/constant/constant';
     NotificationComponent,
     DisplayNotificationsPage,
     HelpPage,
-    MorePage
+    MorePage,
+    TransactionPage,
+    TransactionMasterPage,
+    DisplayMapPage
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     IonicModule.forRoot(MyApp),
-    BrowserAnimationsModule
+    IonicStorageModule.forRoot(),
+    BrowserAnimationsModule,
+    NgCircleProgressModule.forRoot({
+      "backgroundColor": "#F1F1F1",
+      "backgroundPadding": -12,
+      "radius": 60,
+      "toFixed": 0,
+      "outerStrokeWidth": 10,
+      "outerStrokeColor": "#FF6347",
+      "innerStrokeColor": "#32CD32",
+      "innerStrokeWidth": 1,
+      "title": "£1000"
+    }),
+    NgProgressModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,7 +91,10 @@ import { ConstantProvider } from '../providers/constant/constant';
     LoginPage,
     DisplayNotificationsPage,
     HelpPage,
-    MorePage
+    MorePage,
+    TransactionPage,
+    TransactionMasterPage,
+    DisplayMapPage
   ],
   providers: [
     StatusBar,

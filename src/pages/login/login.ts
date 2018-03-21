@@ -24,18 +24,17 @@ export class LoginPage {
     this.showPinDialog();
   }
 
-  showPinDialog() {
-      this
-        .pin
-        .prompt('Enter your PIN', 'Verify PIN', ['OK', 'Cancel'])
-        .then((result : any) => {
-          if (result.buttonIndex == 1) {
-            console.log('User clicked OK, value is: ', result.input1);
-            this.navCtrl.setRoot(TabsPage);
-          } else if (result.buttonIndex == 2)  {
-            console.log('User cancelled');
-          }
-        });
+  async showPinDialog() {
+    try { 
+      let result = await this.pin.prompt('Enter your PIN', 'Verify PIN', ['OK', 'Cancel']);
+      if (result.buttonIndex == 1) {
+          console.log('User clicked OK, value is: ', result.input1);
+          this.navCtrl.setRoot(TabsPage);
+      } else if (result.buttonIndex == 2) {
+          console.log('User cancelled');
+      }
+    }catch(e) {
+      console.log(e);
+    } 
   }
-
 }

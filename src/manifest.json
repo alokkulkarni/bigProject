@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "bigProject",
+  "short_name": "bigProject",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
@@ -9,5 +9,7 @@
     "type": "image/png"
   }],
   "background_color": "#4e8ef7",
-  "theme_color": "#4e8ef7"
+  "theme_color": "#4e8ef7",
+  "gcm_sender_id": "103953800507",
+  "gcm_user_visible_only": true
 }
